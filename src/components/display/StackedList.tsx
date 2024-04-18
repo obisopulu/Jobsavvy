@@ -1,0 +1,99 @@
+'use client';
+
+import ButtonGroup from "./ButtonGroup";
+
+const jobs = [
+  {
+    companyName: 'TechSavvy Inc',
+    position: 'Software Engineer',
+    details: 'Passionate about building scalable web applications using modern technologies like JavaScript, React, Node.js, and Express. Experienced in designing and implementing RESTful APIs, optimizing database queries, and troubleshooting complex issues. Proficient in version control with Git and working in Agile development environments.',
+    firmImageUrl:
+      'https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
+    datePosted: '3 days ago',
+  },
+  {
+    companyName: 'Innovate Solutions LLC',
+    position: 'Data Scientist',
+    details: 'Skilled in machine learning algorithms, statistical analysis, and data visualization techniques using Python, TensorFlow, and scikit-learn. Proficient in handling large datasets, creating predictive models, and deriving actionable insights. Experienced in deploying machine learning models into production environments and collaborating with cross-functional teams.',
+    firmImageUrl:
+      'https://images.unsplash.com/photo-1519244703995-f4e0f30006d5?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
+    datePosted: '3 days ago',
+  },
+  {
+    companyName: 'Vincent Enterprises',
+    position: 'UX Designer',
+    details: 'Creative and detail-oriented UX designer with a focus on user-centered design principles. Proficient in wireframing, prototyping, and creating interactive designs using tools like Sketch, Figma, and Adobe XD. Experienced in conducting user research, usability testing, and iterating designs based on feedback. Strong communication skills and ability to collaborate effectively with product managers and developers.',
+    firmImageUrl:
+      'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
+    datePosted: '1 day ago',
+  },
+  {
+    companyName: 'Walton Technologies',
+    position: 'Product Manager',
+    details: 'Experienced product manager with a proven track record of leading product development from ideation to launch. Skilled in defining product vision, prioritizing features, and creating product roadmaps. Proficient in market analysis, competitor research, and identifying customer needs. Strong leadership and project management skills, with the ability to collaborate effectively with cross-functional teams and stakeholders.',
+    firmImageUrl:
+      'https://images.unsplash.com/photo-1517841905240-472988babdf9?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
+    datePosted: '3 days ago',
+  },
+  {
+    companyName: 'Henry Designs',
+    position: 'Web Developer',
+    details: 'Experienced web developer proficient in HTML, CSS, JavaScript, and various front-end frameworks such as React and Vue.js. Skilled in responsive design, cross-browser compatibility, and optimizing website performance. Strong understanding of web standards and best practices, with a focus on clean and maintainable code. Familiar with back-end technologies like Node.js and Express.',
+    firmImageUrl:
+      'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
+    datePosted: '3 days ago',
+  },
+  {
+    companyName: 'Cook Industries',
+    position: 'Network Administrator',
+    details: 'Seasoned network administrator with expertise in designing, implementing, and maintaining complex network infrastructures. Skilled in configuring routers, switches, firewalls, and VPNs to ensure network security and reliability. Proficient in troubleshooting network issues, optimizing network performance, and implementing disaster recovery solutions. Experienced in managing Active Directory, DNS, DHCP, and other network services.',
+    firmImageUrl:
+      'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
+    datePosted: '2 days ago',
+  },
+];
+
+import { ButtonProps } from '../../types/common.type';
+
+export default function StackedList({buttons}: {buttons: ButtonProps[]}) {
+  return (
+    <div className="p-8 pt- lg:p-24 lg:pt-2 max-w-[1024px] mx-auto">
+      <ul role="list" className="divide-y divide-gray-200">
+        {jobs.map((job) => (
+          <li key={job.companyName} className="flex justify-between flex-col gap-x-6 mt-3">
+            <div className="flex min-w-0 gap-x-4">
+              <img className="h-12 w-12 flex-none rounded-full bg-gray-50" src={job.firmImageUrl} alt="" />
+              <div className="min-w-0 flex-auto">
+                <p className="text-sm font-semibold leading-6 text-gray-900">
+                  {job.position}
+                </p>
+                <p className="mt-1 truncate text-xs leading-5 text-gray-500">
+                  {job.companyName}
+                </p>
+              </div>
+            </div>
+            <div className="mt-4 sm:flex sm:flex-col sm:items-end">
+              <p className="hidden text-sm leading-6 text-gray-900">
+                {job.details.substring(0, 200)}
+              </p>
+              <p className="mt-1 text-xs text-gray-500">
+                Posted {job.datePosted}
+              </p>
+            </div>
+            <div className="mt-4 sm:flex gap-2">
+              <ButtonGroup buttons={buttons}/>
+            </div>
+          </li>
+        ))}
+      </ul>
+    </div>
+  )
+}
+
+
+
+
+
+
+
+
