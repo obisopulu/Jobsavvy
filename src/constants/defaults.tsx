@@ -1,35 +1,35 @@
 import { ButtonProps } from '../types/common.type';
 
-import { useToggle } from '@/hooks/useToggle';
+const onCLick = () => console.log("Save");
 
-export const homeStackedListButtons: ButtonProps[] = [
+export const homeStackedListButtons = (onClick: () => void): ButtonProps[] => [
   {
     symbol: "apply",
     text: "Apply",
-    onClick: () => useToggle
+    onClick: onClick
   },
   {
     symbol: "save",
     text: "Save",
-    onClick: () => useToggle
+    onClick: onClick
   },
-]
+];
 
 export const homeTabListButtons: ButtonProps[] = [
   {
     symbol: "all",
     text: "All",
-    onClick: () => useToggle
+    onClick: () => console.log("Appy")
   },
   {
     symbol: "save",
     text: "Saved",
-    onClick: () => useToggle
+    onClick: () => console.log("Save")
   },
   {
     symbol: "apply",
     text: "Applied",
-    onClick: () => useToggle
+    onClick: () => console.log("Save")
   },
 ]
 

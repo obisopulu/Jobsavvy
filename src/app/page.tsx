@@ -14,6 +14,7 @@ import { jobs } from '@/constants/defaults';
 
 export default function Home() {
   const [isActive, toggleActive] = useToggle(false);
+  //const [openOffcanvas, setOpenOffcanvas] = useState<boolean>(false);
 
   return (
     <>
@@ -21,8 +22,8 @@ export default function Home() {
       <Hero>
         <TabList buttons={homeTabListButtons}/>  
       </Hero>
-      <StackedList jobs={jobs} buttons={homeStackedListButtons} />
-      <Offcanvas isOpen={isActive} onClose={() => toggleActive()} buttons={homeStackedListButtons} /> 
+      <StackedList jobs={jobs} buttons={homeStackedListButtons(toggleActive)} />
+      <Offcanvas isOpen={isActive} onClose={() => toggleActive()} buttons={homeStackedListButtons(toggleActive)} /> 
     </>
   )
 }
