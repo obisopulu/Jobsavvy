@@ -6,7 +6,7 @@ export const useToggle = (initialValue: boolean): [boolean, () => void] => {
   const toggleValue = () => {
     setValue((prevValue) => !prevValue);
   };
-
+  
   return [value, toggleValue];
 };
 
