@@ -6,7 +6,7 @@ import TabList from '@/components/display/TabList';
 
 import { useToggle } from '@/hooks/useToggle';
 
-import { homeStackedListButtons, homeTabListButtons }from '../constants/defaults'
+import { homeStackedListButtons, optionsTabListButtons }from '@/constants/defaults'
 import Offcanvas from '@/components/display/Offcanvas';
 import Header from '@/components/display/Header';
 
@@ -20,7 +20,7 @@ export default function Home() {
     <>
       <Header />
       <Hero>
-        <TabList buttons={homeTabListButtons(toggleActive)}/>  
+        <TabList buttons={optionsTabListButtons(toggleActive)}/>  
       </Hero>
       <StackedList jobs={jobs} buttons={homeStackedListButtons(toggleActive)} />
       <Offcanvas isOpen={isActive} onClose={() => toggleActive()} buttons={homeStackedListButtons(toggleActive)} /> 

@@ -15,21 +15,38 @@ export const homeStackedListButtons = (onClick: () => void): ButtonProps[] => [
   },
 ];
 
-export const homeTabListButtons: ButtonProps[] = [
+export const homeTabListButtons = (onClick: () => void): ButtonProps[] => [
   {
     symbol: "all",
     text: "All",
-    onClick: () => console.log("Appy")
+    onClick: onClick
   },
   {
     symbol: "save",
     text: "Saved",
-    onClick: () => console.log("Save")
+    onClick: onClick
   },
   {
     symbol: "apply",
     text: "Applied",
-    onClick: () => console.log("Save")
+    onClick: onClick
+  },
+]
+export const optionsTabListButtons = (onClick: () => void): ButtonProps[] => [
+  {
+    symbol: "settings",
+    text: "Settings",
+    onClick: onClick
+  },
+  {
+    symbol: "save",
+    text: "Saved",
+    onClick: onClick
+  },
+  {
+    symbol: "apply",
+    text: "Applied",
+    onClick: onClick
   },
 ]
 
