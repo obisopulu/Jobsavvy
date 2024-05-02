@@ -32,21 +32,22 @@ export const homeTabListButtons = (onClick: () => void): ButtonProps[] => [
     onClick: onClick
   },
 ]
-export const optionsTabListButtons = (onClick: () => void): ButtonProps[] => [
+
+export const optionsTabListButtons = (onClick: (text: string) => void): ButtonProps[] => [
   {
     symbol: "settings",
     text: "Settings",
-    onClick: onClick
+    onClick: () => onClick('settings')
   },
   {
     symbol: "save",
     text: "Saved",
-    onClick: onClick
+    onClick: () => onClick('saved')
   },
   {
     symbol: "apply",
     text: "Applied",
-    onClick: onClick
+    onClick: () => onClick('applied')
   },
 ]
 
