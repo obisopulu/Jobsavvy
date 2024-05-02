@@ -4,7 +4,7 @@ import StackedList from '@/components/display/StackedList'
 import Hero from '@/components/display/Hero'
 import TabList from '@/components/display/TabList';
 
-import { useToggle } from '@/hooks/useToggle';
+import { useToggle } from '@/hooks/hooks';
 
 import { homeStackedListButtons, homeTabListButtons }from '../constants/defaults'
 import Offcanvas from '@/components/display/Offcanvas';
