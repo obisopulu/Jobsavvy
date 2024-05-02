@@ -10,4 +10,12 @@ export const useToggle = (initialValue: boolean): [boolean, () => void] => {
   return [value, toggleValue];
 };
 
+export const useToggleTabList = (initialValue: string): [string, (newValue: string) => void] => {
+  const [value, setValue] = useState<string>(initialValue);
 
+  const toggleValue = (newValue: string) => {
+    setValue(newValue);
+  };
+  console.log(value)
+  return [value, toggleValue];
+};
