@@ -12,21 +12,22 @@ import Button from '../input/Button';
 const randomIndex = Math.floor(Math.random() * jobs.length)
 
 export default function Offcanvas({ isOpen, onClose, buttons }: OffcanvasProps){
-  
-  const emailBody = `Dear Hiring Manager, 
-  
-  I am writing to apply for the position of [position] at [companyName]. I am excited about the opportunity to contribute my skills and experience to your team.
-  Thank you for considering my application. I have attached my resume for your review.
+  const [emailSubject, setEmailSubject] = React.useState('Job Application for {position} at {companyName}');
+  const [emailBody, setEmailBody] = React.useState('Dear Hiring Manager, \n\nI am writing to apply for the position of [position] at [companyName]. I am excited about the opportunity to contribute my skills and experience to your team.\nThank you for considering my application. I have attached my resume for your review.\n\nBest regards,\n[Your Name]');
 
-  Best regards,
-  [Your Name]`;
+  const updateEmailBody = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    setEmailBody(e.target.value);
+  }
+  const updateEmailSubject = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    setEmailSubject(e.target.value);
+  }
 
   return (
     <div className={`
       ${isOpen ? 'left-0' : ' left-[100%]'} z-10 top-0 fixed w-full h-full flex justify-end sm:justify-center items-center transition-all duration-500`}>
       <div className="fixed z-20 w-full h-full backdrop-blur-sm bg-black/10 cursor-pointer" onClick={onClose}></div>
 
-      <div className="fixed z-20 w-4/5 h-full sm:h-4/5 sm:w-4/5 sm:max-w-[600px] bg-white sm:rounded-xl p-8  overflow-auto">
+      <div className="fixed z-20 w-4/5 h-full sm:h-auto sm:w-4/5 sm:max-w-[600px] bg-white sm:rounded-xl p-8  overflow-auto">
         <div className="modal-close" onClick={onClose}>
           <div className="text-2xl text-right font-black cursor-pointer">
             &#10006;
@@ -67,8 +68,9 @@ export default function Offcanvas({ isOpen, onClose, buttons }: OffcanvasProps){
                           type="text"
                           name="subject"
                           id="subject"
+                          onChange={updateEmailSubject}
                           className="block flex-1 border-0 bg-transparent py-1.5 pl-1 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6"
-                          value={'Job Application for {position} at {companyName}'}
+                          value={emailSubject}
                           placeholder="subject"
                         />
                       </div>
@@ -81,6 +83,7 @@ export default function Offcanvas({ isOpen, onClose, buttons }: OffcanvasProps){
                           id="email-body"
                           name="email-body"
                           rows={3}
+                          onChange={updateEmailBody}
                           className="block h-40 flex-1 border-0 bg-transparent p-2 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6"
                           placeholder="body"
                           defaultValue={emailBody}
