@@ -8,19 +8,12 @@ import { OffcanvasProps } from '@/types/common.type';
 
 import Imager from './Imager';
 import Button from '../input/Button';
+import TextInput from '../input/TextInput';
+import TextArea from '../input/TextArea';
 
 const randomIndex = Math.floor(Math.random() * jobs.length)
 
 export default function Offcanvas({ isOpen, onClose, buttons }: OffcanvasProps){
-  const [emailSubject, setEmailSubject] = React.useState('Job Application for {position} at {companyName}');
-  const [emailBody, setEmailBody] = React.useState('Dear Hiring Manager, \n\nI am writing to apply for the position of [position] at [companyName]. I am excited about the opportunity to contribute my skills and experience to your team.\nThank you for considering my application. I have attached my resume for your review.\n\nBest regards,\n[Your Name]');
-
-  const updateEmailBody = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    setEmailBody(e.target.value);
-  }
-  const updateEmailSubject = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    setEmailSubject(e.target.value);
-  }
 
   return (
     <div className={`
@@ -64,30 +57,14 @@ export default function Offcanvas({ isOpen, onClose, buttons }: OffcanvasProps){
                   <div>
                     <div className="mt-2">
                       <div className="flex rounded-md shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600 sm:max-w-md w-full mx-auto">
-                        <input
-                          type="text"
-                          name="subject"
-                          id="subject"
-                          onChange={updateEmailSubject}
-                          className="block flex-1 border-0 bg-transparent py-1.5 pl-1 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6"
-                          value={emailSubject}
-                          placeholder="subject"
-                        />
+                        <TextInput text="Job Application for {position} at {companyName}" />
                       </div>
                     </div>
                   </div>
                   <div className="sm:col-span-4">
                     <div className="mt-2">
                       <div className="flex rounded-md shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600 sm:max-w-md w-full mx-auto">
-                        <textarea
-                          id="email-body"
-                          name="email-body"
-                          rows={3}
-                          onChange={updateEmailBody}
-                          className="block h-40 flex-1 border-0 bg-transparent p-2 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6"
-                          placeholder="body"
-                          defaultValue={emailBody}
-                          ></textarea>
+                        <TextArea text="Dear Hiring Manager, \n\nI am writing to apply for the position of [position] at [companyName]. I am excited about the opportunity to contribute my skills and experience to your team.\nThank you for considering my application. I have attached my resume for your review.\n\nBest regards,\n[Your Name]" />
                       </div>
                     </div>
                   </div>

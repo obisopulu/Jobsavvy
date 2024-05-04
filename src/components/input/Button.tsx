@@ -1,7 +1,6 @@
 'use client';
 
 import { ButtonProps } from '../../types/common.type';
-import { useState } from 'react';
 
 export default function Button({text, onClick, symbol}: ButtonProps) {
 
