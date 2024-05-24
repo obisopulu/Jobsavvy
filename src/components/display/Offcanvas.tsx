@@ -11,9 +11,8 @@ import Button from '../input/Button';
 import TextInput from '../input/TextInput';
 import TextArea from '../input/TextArea';
 
-const randomIndex = Math.floor(Math.random() * jobs.length)
-
 export default function Offcanvas({ isOpen, onClose, buttons }: OffcanvasProps){
+  const jobIndex = 2;
 
   return (
     <div className={`
@@ -27,21 +26,21 @@ export default function Offcanvas({ isOpen, onClose, buttons }: OffcanvasProps){
           </div>
         </div>
         <div className="flex justify-center">
-          <Imager src={jobs[randomIndex].firmImageUrl} scale={14} alt={jobs[randomIndex].companyName + ' - ' + jobs[randomIndex].position} />
+          <Imager src={jobs[jobIndex].firmImageUrl} scale={14} alt={jobs[jobIndex].companyName + ' - ' + jobs[jobIndex].position} />
         </div>
         <div className='text-center my-4'>
           <div className='text-sm'>
-            {jobs[randomIndex].companyName}
+            {jobs[jobIndex].companyName}
           </div>
           <div className='text-center'>
-            {jobs[randomIndex].position}
+            {jobs[jobIndex].position}
           </div>
           <div className='text-xs text-center'>
-            {jobs[randomIndex].datePosted}
+            {jobs[jobIndex].datePosted}
           </div>
         </div>
         <div className='text-justify'>
-          {jobs[randomIndex].details}
+          {jobs[jobIndex].details}
         </div>
         <div className='flex flex-col text-xs text-gray-500 my-8'>
           <div className="flex w-[250px] mx-auto justify-center">
@@ -57,14 +56,14 @@ export default function Offcanvas({ isOpen, onClose, buttons }: OffcanvasProps){
                   <div>
                     <div className="mt-2">
                       <div className="flex rounded-md shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600 sm:max-w-md w-full mx-auto">
-                        <TextInput text="Job Application for {position} at {companyName}" />
+                        <TextInput text="Job Application for {position} at {companyName}" id={'subject'} name={'subject'} type={'text'} placeholder={'subject'} required={true} />
                       </div>
                     </div>
                   </div>
                   <div className="sm:col-span-4">
                     <div className="mt-2">
                       <div className="flex rounded-md shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600 sm:max-w-md w-full mx-auto">
-                        <TextArea text="Dear Hiring Manager, \n\nI am writing to apply for the position of [position] at [companyName]. I am excited about the opportunity to contribute my skills and experience to your team.\nThank you for considering my application. I have attached my resume for your review.\n\nBest regards,\n[Your Name]" />
+                        <TextArea id={'body'} name={'body'} placeholder={'body'} required={true} text="Dear Hiring Manager, \n\nI am writing to apply for the position of [position] at [companyName]. I am excited about the opportunity to contribute my skills and experience to your team.\nThank you for considering my application. I have attached my resume for your review.\n\nBest regards,\n[Your Name]" />
                       </div>
                     </div>
                   </div>
