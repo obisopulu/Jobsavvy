@@ -10,9 +10,10 @@ export default function Button({text, onClick, symbol}: ButtonProps) {
         //TODO: x
         !symbol ? 'bg-slate-200 text-black' : 'bg-slate-900 text-white'
       }`}>
-      {symbol === 'save' && <span>&#10084;</span>}
-      {symbol === 'apply' && <span>&#10148;</span>}
-      {symbol === 'all' && <span>&#10047;</span>}
+      {symbol === 'settings' && <span>&#128061;</span>}
+      {symbol === 'save' && <span>&#128150;</span>}
+      {symbol === 'apply' && <span>&#128640;</span>}
+      {symbol === 'all' && <span>&#128011;</span>}
       <span aria-hidden="true">{text}</span></div>
   )
 }
