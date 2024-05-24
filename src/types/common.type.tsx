@@ -1,10 +1,28 @@
 // types.tsx
+import TextInput from '@/components/input/TextInput';
 import React from 'react';
 
 export type ButtonProps = {
-  symbol: string | null;
+  symbol?: string;
   text: string;
   onClick: () => void;
+}
+
+export type TextInputProps = { 
+  text?: string;
+  id?: string;
+  name: string;
+  type?: string;
+  placeholder?: string;
+  required: boolean;
+}
+
+export type TextAreaProps = { 
+  text?: string;
+  id?: string;
+  name: string;
+  placeholder?: string;
+  required: boolean;
 }
 
 export type HeroProps = {
@@ -12,8 +30,8 @@ export type HeroProps = {
 }
 
 export type ImageProps = {
-  src: string;
-  alt: string;
+  src: any;
+  alt: any;
   scale: number;
 };
 
@@ -31,4 +49,15 @@ export type OffcanvasProps = {
   buttons: ButtonProps[];
   isOpen: boolean;
   onClose: () => void;
+}
+
+export type LoginProps = {
+  onSignIn: () => void;
+  onSignInWithGoogle: () => void;
+  onSignInWithGit: () => void;
+}
+
+export type LogoutProps = {
+  logOut: () => void;
+  user: any
 }
