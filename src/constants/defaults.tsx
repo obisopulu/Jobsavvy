@@ -1,7 +1,5 @@
 import { ButtonProps } from '../types/common.type';
 
-const onCLick = () => console.log("Save");
-
 export const homeStackedListButtons = (onClick: () => void): ButtonProps[] => [
   {
     symbol: "apply",
@@ -53,6 +51,7 @@ export const optionsTabListButtons = (onClick: (text: string) => void): ButtonPr
 
 export const jobs = [
   {
+    id: '1',
     companyName: 'TechSavvy Inc',
     position: 'Software Engineer',
     details: 'Passionate about building scalable web applications using modern technologies like JavaScript, React, Node.js, and Express. Experienced in designing and implementing RESTful APIs, optimizing database queries, and troubleshooting complex issues. Proficient in version control with Git and working in Agile development environments.',
@@ -61,6 +60,7 @@ export const jobs = [
     datePosted: '3 days ago',
   },
   {
+    id: '2',
     companyName: 'Innovate Solutions LLC',
     position: 'Data Scientist',
     details: 'Skilled in machine learning algorithms, statistical analysis, and data visualization techniques using Python, TensorFlow, and scikit-learn. Proficient in handling large datasets, creating predictive models, and deriving actionable insights. Experienced in deploying machine learning models into production environments and collaborating with cross-functional teams.',
@@ -69,6 +69,7 @@ export const jobs = [
     datePosted: '3 days ago',
   },
   {
+    id: '3',
     companyName: 'Vincent Enterprises',
     position: 'UX Designer',
     details: 'Creative and detail-oriented UX designer with a focus on user-centered design principles. Proficient in wireframing, prototyping, and creating interactive designs using tools like Sketch, Figma, and Adobe XD. Experienced in conducting user research, usability testing, and iterating designs based on feedback. Strong communication skills and ability to collaborate effectively with product managers and developers.',
@@ -77,6 +78,7 @@ export const jobs = [
     datePosted: '1 day ago',
   },
   {
+    id: '4',
     companyName: 'Walton Technologies',
     position: 'Product Manager',
     details: 'Experienced product manager with a proven track record of leading product development from ideation to launch. Skilled in defining product vision, prioritizing features, and creating product roadmaps. Proficient in market analysis, competitor research, and identifying customer needs. Strong leadership and project management skills, with the ability to collaborate effectively with cross-functional teams and stakeholders.',
@@ -85,6 +87,7 @@ export const jobs = [
     datePosted: '3 days ago',
   },
   {
+    id: '5',
     companyName: 'Henry Designs',
     position: 'Web Developer',
     details: 'Experienced web developer proficient in HTML, CSS, JavaScript, and various front-end frameworks such as React and Vue.js. Skilled in responsive design, cross-browser compatibility, and optimizing website performance. Strong understanding of web standards and best practices, with a focus on clean and maintainable code. Familiar with back-end technologies like Node.js and Express.',
@@ -93,6 +96,7 @@ export const jobs = [
     datePosted: '3 days ago',
   },
   {
+    id: '6',
     companyName: 'Cook Industries',
     position: 'Network Administrator',
     details: 'Seasoned network administrator with expertise in designing, implementing, and maintaining complex network infrastructures. Skilled in configuring routers, switches, firewalls, and VPNs to ensure network security and reliability. Proficient in troubleshooting network issues, optimizing network performance, and implementing disaster recovery solutions. Experienced in managing Active Directory, DNS, DHCP, and other network services.',
