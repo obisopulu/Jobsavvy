@@ -16,6 +16,5 @@ export const useToggleTabList = (initialValue: string): [string, (newValue: stri
   const toggleValue = (newValue: string) => {
     setValue(newValue);
   };
-  console.log(value)
   return [value, toggleValue];
 };
