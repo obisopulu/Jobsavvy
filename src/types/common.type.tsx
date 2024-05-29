@@ -1,7 +1,3 @@
-// types.tsx
-import TextInput from '@/components/input/TextInput';
-import React from 'react';
-
 export type ButtonProps = {
   symbol?: string;
   text: string;
@@ -26,7 +22,7 @@ export type TextAreaProps = {
 }
 
 export type HeroProps = {
-  children: React.ReactNode;
+  children?: React.ReactNode;
 }
 
 export type ImageProps = {
@@ -41,14 +37,23 @@ export type KeywordProps = {
 };
 
 export type StackedListProps = {
-  buttons: ButtonProps[];
+  action:  (id: string) => void;
   jobs: any[];
 };
 
+export type JobCardProps = {
+  action:  (id: string) => void;
+  id: string;
+  companyName: string;
+  firmImageUrl: string;
+  position: string;
+  datePosted: string;
+  details: string;
+};
+
 export type OffcanvasProps = {
-  buttons: ButtonProps[];
-  isOpen: boolean;
-  onClose: () => void;
+  jobId: string;
+  onClose: (id: string) => void;
 }
 
 export type LoginProps = {
@@ -59,5 +64,9 @@ export type LoginProps = {
 
 export type LogoutProps = {
   logOut: () => void;
+  user: any
+}
+
+export type SettingsProps = {
   user: any
 }
