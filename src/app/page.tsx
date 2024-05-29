@@ -25,10 +25,14 @@ import Logout from '@/components/display/Logout';
 import Splash from '@/components/display/Splash';
 
 export default function Home() {
-  const [isActive, toggleActive] = useToggle(false);
+  const [jobId, setJobId] = useState<string>('');
   const [user, setUser] = useState<string | object>('');
   const [splash, setSplash] = useState<boolean>(true);
 
+  const openJob = (id: string) => {
+    setJobId('true');
+    console.log(id)
+  }
   useEffect(() => {
     auth.authStateReady().then(() => {
       setUser(auth?.currentUser || '');
@@ -93,13 +97,13 @@ export default function Home() {
             <SignIn onSignIn={onSignIn} onSignInWithGoogle={onSignInWithGoogle} onSignInWithGit={onSignInWithGit} />
           :
             <>
-            <Header />
+            {/* <Header /> */}
             <Hero>
-              <TabList buttons={homeTabListButtons(toggleActive)}/>  
+              {/* <TabList buttons={homeTabListButtons(toggleActive)}/> */}  
             </Hero>
-            <StackedList jobs={jobs} buttons={homeStackedListButtons(toggleActive)} />
-            <Offcanvas isOpen={isActive} onClose={() => toggleActive()} buttons={homeStackedListButtons(toggleActive)} /> 
             <Logout logOut={logOut} user={user} />
+            <StackedList jobs={jobs} action={openJob} />
+            <Offcanvas jobId={jobId} onClose={() => setJobId('')} /> 
           </>
         }  
     </>
