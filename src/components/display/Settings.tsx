@@ -27,7 +27,20 @@ export default function Settings({user}: SettingsProps){
   const [userIdOption, setOptionUserId] = useState<string>('');
   
   const [loading, setLoading] = useState(true);
-  const [userOption, setUserOption] = useState<object>({
+  /**
+   * Represents the user options.
+   */
+  interface UserOption {
+    body: string;
+    dateCreated: string;
+    keywordsExclude: string;
+    keywordsInclude: string;
+    name: string;
+    subject: string;
+    userId: string;
+  }
+
+  const [userOption, setUserOption] = useState<UserOption>({
     body: "body",
     dateCreated: 'dateCreated',
     keywordsExclude: "keywordsExclude",
@@ -48,7 +61,7 @@ export default function Settings({user}: SettingsProps){
     const q = query(collectionRef, where('userId', '==', user.uid));
     const querySnapshot = await getDocs(q);
     querySnapshot.forEach((doc) => {
-      setUserOption(doc.data());
+      setUserOption(doc.data() as UserOption);
     });
   
     setLoading(false);
@@ -100,7 +113,7 @@ export default function Settings({user}: SettingsProps){
                 name={'body'} 
                 placeholder={'body'} 
                 required={true} 
-                text={userOption?.body} 
+                text={userOption.body} 
               />
             </div>
           </form>
