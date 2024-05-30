@@ -14,6 +14,7 @@ export default function Button({text, onClick, symbol}: ButtonProps) {
         {symbol === 'settings' && <span>&#128061;</span>}
         {symbol === 'save' || symbol === 'saved' && <span>&#128150;</span>}
         {symbol === 'apply' || symbol === 'applied' && <span>&#128640;</span>}
+        {symbol === 'update' && <span>&#128190;</span>}
         {symbol === 'all' && <span>&#128011;</span>}
         {text &&<span aria-hidden="true">{text}</span>}
       </div>
