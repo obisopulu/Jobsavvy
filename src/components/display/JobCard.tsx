@@ -7,7 +7,7 @@ import Imager from "./Imager";
 import Button from "@/components/input/Button";
 import Keywords from "./Keywords";
 
-export default function StackedList({ action, id, companyName, firmImageUrl, position, datePosted, details }: JobCardProps) {
+export default function StackedList({ action, id, companyName, firmImageUrl, position, datePosted }: JobCardProps) {
   return (
     <li key={companyName} className="flex justify-between flex-col gap-x-6 p-3 my-3 rounded-lg bg-gray-100">
       <div className="flex items-center flex-row gap-2">
@@ -17,15 +17,13 @@ export default function StackedList({ action, id, companyName, firmImageUrl, pos
 
         <div className="flex gap-1 justify-between w-full items-center">
           <div className="flex flex-col">
-            <div className="flex-auto">
-              <p>
-                <span className="text-sm font-black text-gray-900">
-                  {position}
-                </span>
-                <span className="mt-1 ml-3 text-xs text-gray-500 lg:block hidden">
-                  Posted {datePosted}
-                </span>
-              </p>
+            <div>
+              <span className="text-sm font-black text-gray-900">
+                {position}
+              </span>
+              <span className="mt-1 ml-2 text-xs text-gray-500 lg:inline hidden">
+                Posted {datePosted}
+              </span>
             </div>
             <p className="truncate text-xs leading-5 text-gray-500">
               {companyName}
