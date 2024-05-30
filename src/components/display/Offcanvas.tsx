@@ -10,10 +10,12 @@ import Imager from './Imager';
 import Button from '../input/Button';
 import TextInput from '../input/TextInput';
 import TextArea from '../input/TextArea';
+import Keywords from './Keywords';
 
 export default function Offcanvas({ jobId, onClose }: OffcanvasProps){
-  //jobId
-  const jobIndex = 2;
+  // = parseInt(jobId);
+  //const jobIndex = jobs.find(job => job.id === jobId);
+  const jobIndex = parseInt(jobId) - 1 || 1;
 
   return (
     <div className={`
@@ -33,15 +35,27 @@ export default function Offcanvas({ jobId, onClose }: OffcanvasProps){
           <div className='text-sm'>
             {jobs[jobIndex].companyName}
           </div>
-          <div className='text-center'>
+          <div className='text-center font-black'>
             {jobs[jobIndex].position}
           </div>
           <div className='text-xs text-center'>
             {jobs[jobIndex].datePosted}
           </div>
         </div>
-        <div className='text-justify'>
+        <div className='text-justify text-sm'>
           {jobs[jobIndex].details}
+        </div>
+        <div className="mt-4 sm:mt-0 text-xs font-bold">
+          <Keywords keyword={'Java'} found={true} />
+          <Keywords keyword={'Python'} found={true} />
+          <Keywords keyword={'JavaScript'} found={true} />
+          <Keywords keyword={'C++'} found={true} />
+          <Keywords keyword={'Ruby'} found={true} />
+          <Keywords keyword={'Go'} found={true} />
+          <Keywords keyword={'Swift'} found={false} />
+          <Keywords keyword={'PHP'} found={true} />
+          <Keywords keyword={'Rust'} found={false} />
+          <Keywords keyword={'TypeScript'} found={true} />
         </div>
         <div className='flex flex-col text-xs text-gray-500 my-8'>
           <div className="flex w-[250px] mx-auto justify-center">
