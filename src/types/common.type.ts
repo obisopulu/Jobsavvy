@@ -25,7 +25,7 @@ export type TextAreaProps = {
   name: string;
   placeholder?: string;
   required: boolean;
-  onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void; //remove ?
+  onChange?: (event: React.ChangeEvent<HTMLTextAreaElement>) => void; //remove ?
 }
 
 export type HeroProps = {
@@ -81,6 +81,7 @@ export type SettingsProps = {
 export type UserOption = {
   body: string;
   dateCreated: any;
+  email: string,
   keywordsExclude: string;
   keywordsInclude: string;
   name: string;
