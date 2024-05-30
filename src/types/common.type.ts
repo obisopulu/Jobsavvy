@@ -16,6 +16,7 @@ export type TextInputProps = {
   type?: string;
   placeholder?: string;
   required: boolean;
+  onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void; //remove ?
 }
 
 export type TextAreaProps = { 
@@ -24,6 +25,7 @@ export type TextAreaProps = {
   name: string;
   placeholder?: string;
   required: boolean;
+  onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void; //remove ?
 }
 
 export type HeroProps = {
