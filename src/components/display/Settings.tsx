@@ -63,18 +63,17 @@ export default function Settings({user}: SettingsProps){
     }
     setLoading(false);
   }
-  //vmKte6ullUMqHmE9GMLMPYjYHHl1
 
   const addNewDocument = async () => {
     try {
       const docRef = await addDoc(userCollection, {
-        body: '',
+        body: 'Dear Hiring Manager,{newLine}{newLine}I am writing to apply for the position of {position} at {companyName}. I am excited about the opportunity to contribute my skills and experience to your team.\nThank you for considering my application. I have attached my resume for your review.{newLine}{newLine}Best regards,{newLine}{yourName}',
         dateCreated: serverTimestamp(),
         email: '',
-        keywordsExclude: '',
-        keywordsInclude: '',
+        keywordsExclude: 'Swift, Rust',
+        keywordsInclude: 'Java, Python, JavaScript, C++, Ruby, Go, PHP, TypeScript',
         name: '',
-        subject: '',
+        subject: 'Job Application for {position} at {companyName}',
         userId: user.uid,
       } as UserOption);
       
@@ -96,8 +95,6 @@ export default function Settings({user}: SettingsProps){
       return;
     }
 
-    console.log(querySnapshot)
-
     querySnapshot.forEach(async (doc) => {
       const docRef = doc.ref;
       try{
@@ -118,7 +115,7 @@ export default function Settings({user}: SettingsProps){
       }
     });
   }
-  console.log(keywordsExcludeOption, nameOption, emailOption, subjectOption, bodyOption, keywordsIncludeOption)
+  
   if (loading) {
     return <Spinner />;
   }
