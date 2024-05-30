@@ -99,9 +99,9 @@ export default function Home() {
             <>
             {/* <Header /> */}
             <Hero>
+              <Logout logOut={logOut} user={user} />
               {/* <TabList buttons={homeTabListButtons(toggleActive)}/> */}  
             </Hero>
-            <Logout logOut={logOut} user={user} />
             <StackedList jobs={jobs} action={openJob} />
             <Offcanvas jobId={jobId} onClose={() => setJobId('')} /> 
           </>
