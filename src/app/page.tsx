@@ -21,7 +21,7 @@ import SignIn from '@/components/display/Login';
 import { auth, db, googleProvider, gitProvider } from '@/config/firebase';
 import { createUserWithEmailAndPassword, signInWithPopup, signOut } from "firebase/auth";
 
-import Logout from '@/components/display/Logout';
+import Logout from '@/components/display/Menu';
 import Splash from '@/components/display/Splash';
 
 export default function Home() {
