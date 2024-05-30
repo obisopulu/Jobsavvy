@@ -10,7 +10,7 @@ import Keywords from "./Keywords";
 export default function StackedList({ action, id, companyName, firmImageUrl, position, datePosted, details }: JobCardProps) {
   return (
     <li key={companyName} className="flex justify-between flex-col gap-x-6 p-3 my-3 rounded-lg bg-gray-100">
-      <div className="flex items-center flex-col sm:flex-row gap-2">
+      <div className="flex items-center flex-row gap-2">
         <div className="">
           <Imager src={firmImageUrl} alt={companyName} scale={16} />
         </div>
@@ -22,7 +22,7 @@ export default function StackedList({ action, id, companyName, firmImageUrl, pos
                 <span className="text-sm font-black text-gray-900">
                   {position}
                 </span>
-                <span className="mt-1 ml-3 text-xs text-gray-500">
+                <span className="mt-1 ml-3 text-xs text-gray-500 lg:block hidden">
                   Posted {datePosted}
                 </span>
               </p>
@@ -30,7 +30,7 @@ export default function StackedList({ action, id, companyName, firmImageUrl, pos
             <p className="truncate text-xs leading-5 text-gray-500">
               {companyName}
             </p>
-            <div className="mt-4 sm:mt-0 text-end text-xs font-bold">
+            <div className="mt-4 sm:mt-0 text-end text-xs font-bold lg:block hidden">
               <Keywords keyword={'Java'} found={true} />
               <Keywords keyword={'Python'} found={true} />
               <Keywords keyword={'JavaScript'} found={true} />
