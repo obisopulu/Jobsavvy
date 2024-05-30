@@ -23,7 +23,7 @@ import SignIn from '@/components/display/Login';
 import { auth, db, googleProvider, gitProvider } from '@/config/firebase';
 import { createUserWithEmailAndPassword, signInWithPopup, signOut } from "firebase/auth";
 
-import Logout from '@/components/display/Logout';
+import Logout from '@/components/display/Menu';
 import Splash from '@/components/display/Splash';
 import Settings from '@/components/display/Settings';
 
@@ -71,7 +71,7 @@ export default function Options() {
           <>
             <Hero>
               <Logout logOut={logOut} user={user} />
-              <TabList buttons={optionsTabListButtons(setTabList)}/>  
+              <TabList buttons={optionsTabListButtons(setTabList)} selected={tabList} />  
             </Hero>
             {tabList != 'settings' && <StackedList jobs={jobs} action={openJob} />}
             {tabList == 'settings' && <Settings user={user} />}
