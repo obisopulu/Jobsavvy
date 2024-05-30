@@ -46,7 +46,7 @@ export default function StackedList({ action, id, companyName, firmImageUrl, pos
 
           <div className="flex flex-col items-center justify-between">
             <div className="justify-between">
-              <Button text={''} onClick={() => {action('id')}} symbol={'link'} />
+              <Button text={''} onClick={() => {action(id)}} symbol={'link'} />
             </div>
           </div>
         </div>
