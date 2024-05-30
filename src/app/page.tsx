@@ -12,7 +12,7 @@ import { homeStackedListButtons, homeTabListButtons }from '../constants/defaults
 import Offcanvas from '@/components/display/Offcanvas';
 import Header from '@/components/display/Header';
 
-import { collection, getDocs, addDoc, deleteDoc, updateDoc, doc } from 'firebase/firestore';
+import { collection, getDocs, addDoc, deleteDoc, updateDoc, doc, serverTimestamp } from 'firebase/firestore';
 
 import { jobs } from '@/constants/defaults';
 import SignIn from '@/components/display/Login';
@@ -24,13 +24,15 @@ import { createUserWithEmailAndPassword, signInWithPopup, signOut } from "fireba
 import Logout from '@/components/display/Menu';
 import Splash from '@/components/display/Splash';
 
+import { UserOption } from '@/types/common.type';
+
 export default function Home() {
   const [jobId, setJobId] = useState<string>('');
   const [user, setUser] = useState<string | object>('');
   const [splash, setSplash] = useState<boolean>(true);
 
   const openJob = (id: string) => {
-    setJobId('true');
+    setJobId(id);
     console.log(id)
   }
   useEffect(() => {
