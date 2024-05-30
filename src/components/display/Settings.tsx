@@ -32,10 +32,13 @@ export default function Settings({user}: SettingsProps){
   /**
    * Represents the user options.
    */
+  const userCollection = collection(db, 'userSettings');
+  const q = query(userCollection, where('userId', '==', user.uid));
 
   const [userOption, setUserOption] = useState<UserOption>({
     body: "body",
     dateCreated: 'dateCreated',
+    email: '',
     keywordsExclude: "keywordsExclude",
     keywordsInclude: "keywordsInclude",
     name: "name",
@@ -50,32 +53,29 @@ export default function Settings({user}: SettingsProps){
   const getUserSettings = async () => {
     setLoading(true);
   
-    const collectionRef = collection(db, 'userSettings');
-    const q = query(collectionRef, where('userId', '==', user.uid));
     const querySnapshot = await getDocs(q);
-    if(querySnapshot){
+    if(querySnapshot.empty){
+      addNewDocument();
+    }else{
       querySnapshot.forEach((doc) => {
         setUserOption(doc.data() as UserOption);
       });
-    }else{
-      addNewDocument();
     }
-  
     setLoading(false);
   }
-  
+  //vmKte6ullUMqHmE9GMLMPYjYHHl1
 
-  async function addNewDocument() {
+  const addNewDocument = async () => {
     try {
-      // Reference to your collection
-      const docRef = await addDoc(collection(db, 'userSettings'), {
+      const docRef = await addDoc(userCollection, {
         body: '',
         dateCreated: serverTimestamp(),
+        email: '',
         keywordsExclude: '',
         keywordsInclude: '',
         name: '',
         subject: '',
-        userId: '',
+        userId: user.uid,
       } as UserOption);
       
       console.log('Document written with ID: ', docRef.id);
@@ -84,17 +84,52 @@ export default function Settings({user}: SettingsProps){
     }
   }
 
+  const updateDocument = async () => {
+    
+    const userCollection = collection(db, 'userSettings');
+    const q = query(userCollection, where('userId', '==', user.uid));
+
+    const querySnapshot = await getDocs(q);
+
+    if (querySnapshot.empty) {
+      console.log("No matching documents found.");
+      return;
+    }
+
+    console.log(querySnapshot)
+
+    querySnapshot.forEach(async (doc) => {
+      const docRef = doc.ref;
+      try{
+        await updateDoc(docRef, {
+          name: nameOption,
+          email: emailOption,
+          subject: subjectOption,
+          body: bodyOption,
+          keywordsExclude: keywordsExcludeOption,
+          keywordsInclude: keywordsIncludeOption,
+        })
+          .then(() => {
+            getUserSettings();
+            console.log(`Document with ID: ${doc.id} updated successfully.`);
+          })
+      }catch(e){
+        console.error(`Error updating document: ${e}`);
+      }
+    });
+  }
+  console.log(keywordsExcludeOption, nameOption, emailOption, subjectOption, bodyOption, keywordsIncludeOption)
   if (loading) {
     return <Spinner />;
   }
-  
+
   return (
     <div className="p-4 pt-0 lg:px-24 lg:pt-2 max-w-[1024px] mx-auto text-center">
       {
         loading ?
           <Spinner />
         :
-          <form className='w-full'>
+          <form className='w-full' onSubmit={updateDocument}>
             <div className='flex flex-col gap-4 m-4 text-left p-2 bg-slate-50 rounded-lg mb-4'>
               <div className='font-bold'>Personal Information</div>
               <TextInput 
@@ -107,7 +142,7 @@ export default function Settings({user}: SettingsProps){
                 onChange={(e) => setOptionName(e.target.value)}
               />
               <TextInput 
-                text={user.email} 
+                text={userOption?.email} 
                 id={'email'} 
                 name={'email'} 
                 type={'email'} 
@@ -158,7 +193,7 @@ export default function Settings({user}: SettingsProps){
               />
             </div>
             <div className='flex justify-center mt-5 mb-20'>
-              <Button key={'update'} onClick={() => {}} symbol={'update'} text={'Update'} />
+              <Button key={'update'} onClick={updateDocument} symbol={'update'} text={'Update'} />
             </div>
           </form>
       }
