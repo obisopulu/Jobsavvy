@@ -22,7 +22,7 @@ export default function SignIn({logOut, user} : LogoutProps) {
         <div className="bg-slate-200 rounded-3xl p-2">
           <Imager src={user.photoURL} alt={''} scale={8} />
         </div>
-        <Button key={'logOut'} onClick={logOut} text={'log Out'} />
+        <Button key={'logOut'} onClick={logOut} text={'log out'} />
       </div>
   )
 }
