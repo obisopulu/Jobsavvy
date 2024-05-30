@@ -77,3 +77,13 @@ export type LogoutProps = {
 export type SettingsProps = {
   user: any
 }
+
+export type UserOption = {
+  body: string;
+  dateCreated: any;
+  keywordsExclude: string;
+  keywordsInclude: string;
+  name: string;
+  subject: string;
+  userId: string;
+}
