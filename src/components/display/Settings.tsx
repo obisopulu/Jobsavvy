@@ -16,6 +16,7 @@ import Button from '../input/Button';
 import TextInput from '../input/TextInput';
 import TextArea from '../input/TextArea';
 import Spinner from './Spinner';
+import Alert from './Alert';
 
 export default function Settings({user}: SettingsProps){
   
@@ -28,10 +29,10 @@ export default function Settings({user}: SettingsProps){
   const [subjectOption, setOptionSubject] = useState<string>('');
   const [bodyOption, setOptionBody] = useState<string>('');
   
-  const [loading, setLoading] = useState(true);
-  /**
-   * Represents the user options.
-   */
+  const [loading, setLoading] = useState<boolean>(true);
+
+  const [alerter, setAlerter] = useState<string>('')
+  
   const userCollection = collection(db, 'userSettings');
   const q = query(userCollection, where('userId', '==', user.uid));
 
@@ -109,6 +110,7 @@ export default function Settings({user}: SettingsProps){
           .then(() => {
             getUserSettings();
             console.log(`Document with ID: ${doc.id} updated successfully.`);
+            setAlerter('options updated')
           })
       }catch(e){
         console.error(`Error updating document: ${e}`);
@@ -126,6 +128,7 @@ export default function Settings({user}: SettingsProps){
         loading ?
           <Spinner />
         :
+
           <form className='w-full' onSubmit={updateDocument}>
             <div className='flex flex-col gap-4 m-4 text-left p-2 bg-slate-50 rounded-lg mb-4'>
               <div className='font-bold'>Personal Information</div>
@@ -193,6 +196,10 @@ export default function Settings({user}: SettingsProps){
               <Button key={'update'} onClick={updateDocument} symbol={'update'} text={'Update'} />
             </div>
           </form>
+      }
+      {
+        alerter && 
+        <Alert text={alerter} isError={false} show={true} />
       }
     </div>
   );
