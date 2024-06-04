@@ -25,20 +25,46 @@ import Logout from '@/components/display/Menu';
 import Splash from '@/components/display/Splash';
 
 import { UserOption } from '@/types/common.type';
+import Alert from '@/components/display/Alert';
 
 export default function Home() {
+
+/*   const smoove = async () => {
+    const url = 'https://email-finder12.p.rapidapi.com/enrich/';
+    const options = {
+      method: 'POST',
+      headers: {
+        'x-rapidapi-key': '35e1d773b3msh5ab4039504d68ebp1e4337jsnd7fc13a7dc1a',
+        'x-rapidapi-host': 'email-finder12.p.rapidapi.com',
+        'Content-Type': 'application/json'
+      },
+      body: {
+        first_name: 'Support',
+        last_name: 'Prospectjet',
+        company_domain: 'prospectjet.com'
+      }
+    };
+    try {
+      const response = await fetch(url, options);
+      const result = await response.text();
+      console.log(result);
+    } catch (error) {
+      console.error(error);
+    }
+  } */
+
   const [jobId, setJobId] = useState<string>('');
   const [user, setUser] = useState<string | object>('');
   const [splash, setSplash] = useState<boolean>(true);
 
   const openJob = (id: string) => {
     setJobId(id);
-    console.log(id)
   }
   useEffect(() => {
     auth.authStateReady().then(() => {
       setUser(auth?.currentUser || '');
       setSplash(false);
+      //smoove()
     });
   }, []);
 
@@ -54,6 +80,7 @@ export default function Home() {
       }
     } catch (error) {
       console.log(error);
+      <Alert text="That didn't work" isError={false} show={true} />
     }
   }
 
@@ -62,8 +89,10 @@ export default function Home() {
       const userCredential = await signInWithPopup(auth, googleProvider);
       const user = userCredential.user;
       setUser(auth?.currentUser || user);
+      <Alert text="Welcome aboard" isError={false} show={true} />
     } catch (error) {
       console.log(error);
+      <Alert text="Error getting you on board with Google" isError={false} show={true} />
     }
   }
 
@@ -72,8 +101,10 @@ export default function Home() {
       const userCredential = await signInWithPopup(auth, gitProvider);
       const user = userCredential.user;
       setUser(auth?.currentUser || user);
+      <Alert text="Welcome aboard" isError={false} show={true} />
     } catch (error) {
       console.log(error);
+      <Alert text="Error getting you on board with Git" isError={false} show={true} />
     }
   }
 
@@ -81,8 +112,10 @@ export default function Home() {
     try {
       await signOut(auth);
       setUser('');
+      <Alert text="You are off! we await your return" isError={false} show={true} />
     } catch (error) {
       console.log(error);
+      <Alert text="Couldn't quite get you logged out" isError={true} show={true} />
     }
   }
 
@@ -103,7 +136,7 @@ export default function Home() {
             <Hero>
               <Logout logOut={logOut} user={user} />
               {/* <TabList buttons={homeTabListButtons(toggleActive)}/> */}  
-            </Hero>
+            </Hero>            
             <StackedList jobs={jobs} action={openJob} />
             <Offcanvas jobId={jobId} onClose={() => setJobId('')} /> 
           </>
