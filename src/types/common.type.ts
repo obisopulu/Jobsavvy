@@ -87,3 +87,9 @@ export type UserOption = {
   subject: string;
   userId: string;
 }
+
+export type AlertProps = {
+  text: string;
+  isError: boolean;
+  show: boolean;
+}
