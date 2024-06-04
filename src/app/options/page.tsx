@@ -26,6 +26,7 @@ import { createUserWithEmailAndPassword, signInWithPopup, signOut } from "fireba
 import Logout from '@/components/display/Menu';
 import Splash from '@/components/display/Splash';
 import Settings from '@/components/display/Settings';
+import Alert from '@/components/display/Alert';
 
 export default function Options() {
   const [user, setUser] = useState<string | object>('');
@@ -33,21 +34,21 @@ export default function Options() {
 
   const [tabList, setTabList] = useToggleTabList('settings');
   const [splash, setSplash] = useState<boolean>(true);
+  const [alerter, setAlerter] = useState<[string, boolean]>(['', false]);
 
   const openJob = (id: string) => {
     setJobId('true');
-    console.log(id)
   }
 
   const router = useRouter()
   useEffect(() => {
-    auth.authStateReady().then(() => {
-      setUser(auth?.currentUser || '');
-      
-      if(user == '') {
-        //router.push("/")
-      }
-      setSplash(false);
+    auth.authStateReady()
+      .then(() => {
+        setUser(auth?.currentUser || 'xx');
+        setSplash(false);
+        /* if(!auth?.currentUser) {
+          router.push("/")
+        } */
     })
   }, []);
 
@@ -55,8 +56,10 @@ export default function Options() {
     try {
       await signOut(auth);
       setUser('');
+      setAlerter(["You are off! we await your return", false])
     } catch (error) {
       console.log(error);
+      setAlerter(["Couldn't quite get you logged out", true])
     }
   }
   
@@ -75,7 +78,8 @@ export default function Options() {
             </Hero>
             {tabList != 'settings' && <StackedList jobs={jobs} action={openJob} />}
             {tabList == 'settings' && <Settings user={user} />}
-            <Offcanvas jobId={jobId} onClose={() => setJobId('')} /> 
+            <Offcanvas jobId={jobId} onClose={() => setJobId('')} />
+            {alerter[1] && <Alert text={alerter[0]} isError={alerter[1]} show={true} />}
           </>
       }
     </>
