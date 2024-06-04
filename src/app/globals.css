@@ -36,3 +36,30 @@ body {
 body {
   height: 100%;
 }
+
+@keyframes slideIn {
+  from {
+    transform: translateY(100px);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideOut {
+  from {
+    transform: translateY(0);
+  }
+  to {
+    transform: translateY(100px);
+  }
+}
+
+/* You can include these styles in your global CSS or a CSS module */
+.alert-slide-in {
+  animation: slideIn 0.5s forwards;
+}
+
+.alert-slide-out {
+  animation: slideOut 0.5s forwards;
+}
