@@ -10,6 +10,7 @@ import { jobs } from '@/constants/defaults';
 
 import { SettingsProps } from '@/types/common.type';
 import { UserOption } from '@/types/common.type';
+import { documentDefaults, newDocumentDefaults } from '@/constants/defaults';
 
 import Imager from './Imager';
 import Button from '../input/Button';
@@ -19,37 +20,28 @@ import Spinner from './Spinner';
 import Alert from './Alert';
 
 export default function Settings({user}: SettingsProps){
-  
-  const [nameOption, setOptionName] = useState<string>('');
-  const [emailOption, setOptionEmail] = useState<string>('');
-
-  const [keywordsExcludeOption, setOptionKeywordsExclude] = useState<string>('');
-  const [keywordsIncludeOption, setOptionKeywordsInclude] = useState<string>('');
-
-  const [subjectOption, setOptionSubject] = useState<string>('');
-  const [bodyOption, setOptionBody] = useState<string>('');
-  
-  const [loading, setLoading] = useState<boolean>(true);
-
-  const [alerter, setAlerter] = useState<string>('')
-  
-  const userCollection = collection(db, 'userSettings');
-  const q = query(userCollection, where('userId', '==', user.uid));
-
-  const [userOption, setUserOption] = useState<UserOption>({
-    body: "body",
-    dateCreated: 'dateCreated',
-    email: '',
-    keywordsExclude: "keywordsExclude",
-    keywordsInclude: "keywordsInclude",
-    name: "name",
-    subject: "subject",
-    userId: "userId"
-  });
 
   useEffect(() => {
     getUserSettings();
   }, []);
+
+  const [userOption, setUserOption] = useState<UserOption>(documentDefaults());
+  
+  const [nameOption, setOptionName] = useState<string>(user?.name ? user?.name : '');
+  const [emailOption, setOptionEmail] = useState<string>(user?.email ? user?.email : '');
+
+  const [keywordsExcludeOption, setOptionKeywordsExclude] = useState<string>(user?.keywordsExclude ? user?.keywordsExclude : '');
+  const [keywordsIncludeOption, setOptionKeywordsInclude] = useState<string>(user?.keywordsInclude ? user?.keywordsInclude : '');
+
+  const [subjectOption, setOptionSubject] = useState<string>(user?.subject ? user?.subject : '');
+  const [bodyOption, setOptionBody] = useState<string>(user?.body ? user?.body : '');
+  
+  const [loading, setLoading] = useState<boolean>(true);
+
+  const [alerter, setAlerter] = useState<[string, boolean, boolean]>(['xxx', false, false])
+  
+  const userCollection = collection(db, 'userSettings');
+  const q = query(userCollection, where('userId', '==', user.uid));
   
   const getUserSettings = async () => {
     setLoading(true);
@@ -57,6 +49,7 @@ export default function Settings({user}: SettingsProps){
     const querySnapshot = await getDocs(q);
     if(querySnapshot.empty){
       addNewDocument();
+      setUserOption(newDocumentDefaults(user.displayName, user.email, user.uid, serverTimestamp()))
     }else{
       querySnapshot.forEach((doc) => {
         setUserOption(doc.data() as UserOption);
@@ -64,20 +57,11 @@ export default function Settings({user}: SettingsProps){
     }
     setLoading(false);
   }
-
+  
   const addNewDocument = async () => {
     try {
-      const docRef = await addDoc(userCollection, {
-        body: 'Dear Hiring Manager,{newLine}{newLine}I am writing to apply for the position of {position} at {companyName}. I am excited about the opportunity to contribute my skills and experience to your team.\nThank you for considering my application. I have attached my resume for your review.{newLine}{newLine}Best regards,{newLine}{yourName}',
-        dateCreated: serverTimestamp(),
-        email: '',
-        keywordsExclude: 'Swift, Rust',
-        keywordsInclude: 'Java, Python, JavaScript, C++, Ruby, Go, PHP, TypeScript',
-        name: '',
-        subject: 'Job Application for {position} at {companyName}',
-        userId: user.uid,
-      } as UserOption);
-      
+      const docRef = await addDoc(userCollection, newDocumentDefaults(user.displayName, user.email, user.uid, serverTimestamp()) as UserOption);
+      setUserOption(newDocumentDefaults(user.displayName, user.email, user.uid, serverTimestamp()))
       console.log('Document written with ID: ', docRef.id);
     } catch (e) {
       console.error('Error adding document: ', e);
@@ -96,26 +80,33 @@ export default function Settings({user}: SettingsProps){
       return;
     }
 
-    querySnapshot.forEach(async (doc) => {
-      const docRef = doc.ref;
-      try{
-        await updateDoc(docRef, {
-          name: nameOption,
-          email: emailOption,
-          subject: subjectOption,
-          body: bodyOption,
-          keywordsExclude: keywordsExcludeOption,
-          keywordsInclude: keywordsIncludeOption,
-        })
-          .then(() => {
-            getUserSettings();
-            console.log(`Document with ID: ${doc.id} updated successfully.`);
-            setAlerter('options updated')
+    if(nameOption !== '' && emailOption !== '' && subjectOption !== '' && bodyOption !== '' && keywordsExcludeOption !== '' && keywordsIncludeOption !== ''){
+      querySnapshot.forEach(async (doc) => {
+        const docRef = doc.ref;
+        try{
+          await updateDoc(docRef, {
+            name: nameOption,
+            email: emailOption,
+            subject: subjectOption,
+            body: bodyOption,
+            keywordsExclude: keywordsExcludeOption,
+            keywordsInclude: keywordsIncludeOption,
           })
-      }catch(e){
-        console.error(`Error updating document: ${e}`);
-      }
-    });
+            .then(() => {
+              getUserSettings();
+              console.log(`Document with ID: ${doc.id} updated successfully.`);
+              setAlerter(['options updated', false, true])
+            })
+        }catch(e){
+          console.error(`Error updating document: ${e}`);
+        }
+      });
+    }else{
+      console.log('xxx')
+      setAlerter(['All fields are required', true, true])
+    }
+    
+    setUserOption(newDocumentDefaults(user.displayName, user.email, user.uid, serverTimestamp()) as UserOption);
   }
   
   if (loading) {
@@ -147,7 +138,7 @@ export default function Settings({user}: SettingsProps){
                 name={'email'} 
                 type={'email'} 
                 placeholder={'Your email'} 
-                required={false} 
+                required={true} 
                 onChange={(e) => setOptionEmail(e.target.value)}
               />
             </div>
@@ -168,7 +159,7 @@ export default function Settings({user}: SettingsProps){
                 name={'keywordsExclude'} 
                 type={'text'} 
                 placeholder={'keywords to exclude'} 
-                required={false} 
+                required={true} 
                 onChange={(e) => setOptionKeywordsExclude(e.target.value)}
               />
             </div>
@@ -199,7 +190,7 @@ export default function Settings({user}: SettingsProps){
       }
       {
         alerter && 
-        <Alert text={alerter} isError={false} show={true} />
+        <Alert text={alerter[0]} isError={alerter[1]} show={alerter[2]} />
       }
     </div>
   );
