@@ -1,4 +1,27 @@
+import { FieldValue } from 'firebase/firestore';
 import { ButtonProps } from '../types/common.type';
+
+export const documentDefaults = () => ({
+  body: "body",
+  dateCreated: 'dateCreated',
+  email: "email",
+  keywordsExclude: "keywordsExclude",
+  keywordsInclude: "keywordsInclude",
+  name: "name",
+  subject: "subject",
+  userId: "userId"
+});
+
+export const newDocumentDefaults = (name: string, email: string, uid: string, time: FieldValue) => ({
+  body: 'Dear Hiring Manager,{newLine}{newLine}I am writing to apply for the position of {position} at {companyName}. I am excited about the opportunity to contribute my skills and experience to your team.\nThank you for considering my application. I have attached my resume for your review.{newLine}{newLine}Best regards,{newLine}{yourName}',
+  dateCreated: time,
+  email: email,
+  keywordsExclude: 'Swift, Rust',
+  keywordsInclude: 'Java, Python, JavaScript, C++, Ruby, Go, PHP, TypeScript',
+  name: name,
+  subject: 'Job Application for {position} at {companyName}',
+  userId: uid
+});
 
 export const homeStackedListButtons = (onClick: () => void): ButtonProps[] => [
   {
