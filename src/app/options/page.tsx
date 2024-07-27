@@ -17,13 +17,13 @@ import Header from '@/components/display/Header';
 import { collection, getDocs, addDoc, deleteDoc, updateDoc, doc } from 'firebase/firestore';
 
 import { jobs, optionsTabListButtons } from '@/constants/defaults';
-import SignIn from '@/components/display/Login';
+import SignIn from '@/components/display/SignIn';
 
 
 import { auth, db, googleProvider, gitProvider } from '@/config/firebase';
 import { createUserWithEmailAndPassword, signInWithPopup, signOut } from "firebase/auth";
 
-import Logout from '@/components/display/Menu';
+import Menu from '@/components/display/Menu';
 import Splash from '@/components/display/Splash';
 import Settings from '@/components/display/Settings';
 import Alert from '@/components/display/Alert';
@@ -37,7 +37,7 @@ export default function Options() {
   const [alerter, setAlerter] = useState<[string, boolean]>(['', false]);
 
   const openJob = (id: string) => {
-    setJobId('true');
+    setJobId(id);
   }
 
   const router = useRouter()
@@ -73,7 +73,7 @@ export default function Options() {
         user &&  
           <>
             <Hero>
-              <Logout logOut={logOut} user={user} />
+              <Menu logOut={logOut} user={user} action={openJob}/>
               <TabList buttons={optionsTabListButtons(setTabList)} selected={tabList} />  
             </Hero>
             {tabList != 'settings' && <StackedList jobs={jobs} action={openJob} />}
