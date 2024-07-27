@@ -15,13 +15,13 @@ import Header from '@/components/display/Header';
 import { collection, getDocs, addDoc, deleteDoc, updateDoc, doc, serverTimestamp } from 'firebase/firestore';
 
 import { jobs } from '@/constants/defaults';
-import SignIn from '@/components/display/Login';
+import SignIn from '@/components/display/SignIn';
 
 
 import { auth, db, googleProvider, gitProvider } from '@/config/firebase';
 import { createUserWithEmailAndPassword, signInWithPopup, signOut } from "firebase/auth";
 
-import Logout from '@/components/display/Menu';
+import Menu from '@/components/display/Menu';
 import Splash from '@/components/display/Splash';
 
 import { UserOption } from '@/types/common.type';
@@ -134,7 +134,7 @@ export default function Home() {
             <>
             {/* <Header /> */}
             <Hero>
-              <Logout logOut={logOut} user={user} />
+              <Menu logOut={logOut} user={user} action={openJob}/>
               {/* <TabList buttons={homeTabListButtons(toggleActive)}/> */}  
             </Hero>            
             <StackedList jobs={jobs} action={openJob} />
