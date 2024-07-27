@@ -23,6 +23,7 @@ export default function Settings({user}: SettingsProps){
 
   useEffect(() => {
     getUserSettings();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const [userOption, setUserOption] = useState<UserOption>(documentDefaults());
@@ -103,7 +104,7 @@ export default function Settings({user}: SettingsProps){
       });
     }else{
       console.log('xxx')
-      setAlerter(['All fields are required', true, true])
+      setAlerter(['All fields are required, edit if auto filled', true, true])
     }
     
     setUserOption(newDocumentDefaults(user.displayName, user.email, user.uid, serverTimestamp()) as UserOption);
