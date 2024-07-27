@@ -71,6 +71,7 @@ export type LoginProps = {
 export type LogoutProps = {
   logOut: () => void;
   user: any
+  action:  (id: string) => void;
 }
 
 export type SettingsProps = {

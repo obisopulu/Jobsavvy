@@ -3,6 +3,7 @@
 import Button from "../input/Button";
 import TextInput from "../input/TextInput";
 import { LoginProps } from '../../types/common.type';
+import Hero from "./Hero";
 
 export default function SignIn({onSignIn, onSignInWithGoogle, onSignInWithGit} : LoginProps) {
 
@@ -11,8 +12,9 @@ export default function SignIn({onSignIn, onSignInWithGoogle, onSignInWithGit} :
       <div className="h-screen flex flex-col items-center justify-center">
         <div className="mx-auto flex items-center flex-col">
           <span className="text-4xl">&#129382;</span>
-          <h2 className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
-            Sign in{' to your account'}
+          <Hero />
+          <h2>
+            Sign in to your account
           </h2>
         </div>
 
@@ -61,11 +63,11 @@ export default function SignIn({onSignIn, onSignInWithGoogle, onSignInWithGit} :
           </form>
 
           <div className='flex justify-center gap-4 font-black'>
-            <div className="flex flex-col items-center justify-center bg-slate-200 text-black h-[150px] rounded-lg w-[100px]" onClick={onSignInWithGoogle}>
+            <div className="flex flex-col items-center justify-center bg-slate-200 text-black h-[150px] rounded-lg w-[100px] cursor-pointer" onClick={onSignInWithGoogle}>
               <div className="text-3xl mb-4">&#128762;</div>
               Google
             </div>
-            <div className="flex flex-col items-center justify-center bg-slate-200 text-black h-[150px] rounded-lg w-[100px]" onClick={onSignInWithGit}>
+            <div className="flex flex-col items-center justify-center bg-slate-200 text-black h-[150px] rounded-lg w-[100px] cursor-pointer" onClick={onSignInWithGit}>
               <div className="text-3xl mb-4">&#128760;</div>
               Git</div>
           </div>
