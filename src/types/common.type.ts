@@ -55,6 +55,7 @@ export type JobCardProps = {
   firmImageUrl: string;
   position: string;
   datePosted: string;
+  complete?: string;
 };
 
 export type OffcanvasProps = {
