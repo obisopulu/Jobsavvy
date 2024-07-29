@@ -7,7 +7,7 @@ import Imager from "./Imager";
 import Button from "@/components/input/Button";
 import Keywords from "./Keywords";
 
-export default function StackedList({ action, id, companyName, firmImageUrl, position, datePosted }: JobCardProps) {
+export default function StackedList({ action, id, companyName, firmImageUrl, position, datePosted, complete }: JobCardProps) {
   return (
     <li key={companyName} className="flex justify-between flex-col gap-x-6 p-3 my-3 rounded-lg bg-gray-100">
       <div className="flex items-center flex-row gap-2">
@@ -43,7 +43,13 @@ export default function StackedList({ action, id, companyName, firmImageUrl, pos
           </div>
 
           <div className="flex flex-col items-center justify-between">
-            <div className="justify-between">
+            <div className="flex items-center gap-2">
+              {
+                complete == 'yes' && <div className="w-2 h-2 bg-emerald-500 rounded"></div>
+              }
+              {
+              complete == 'no' && <div className="w-2 h-2 bg-red-700 rounded"></div>
+              }
               <Button text={''} onClick={() => {action(id)}} symbol={'link'} />
             </div>
           </div>
