@@ -27,6 +27,7 @@ export default function StackedList({ jobs, action, option }: StackedListProps) 
                 jobPosition={job.jobPosition} 
                 dateCreated={job.dateCreated} 
                 complete={complete} 
+                manage={option == 'manage' && true} 
               />
             )
           );

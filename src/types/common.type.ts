@@ -58,6 +58,7 @@ export type JobCardProps = {
   jobPosition: string;
   dateCreated: object;
   complete: boolean;
+  manage?: boolean;
 };
 
 export type OffcanvasProps = {
