@@ -76,7 +76,8 @@ export default function Options() {
               <Menu logOut={logOut} user={user} action={openJob}/>
               <TabList buttons={optionsTabListButtons(setTabList)} selected={tabList} />  
             </Hero>
-            {tabList != 'settings' && <StackedList jobs={jobs} action={openJob} />}
+            {tabList == 'manage' && <StackedList jobs={jobs} action={openJob} option='manage' />}
+            {tabList != 'settings' && tabList != 'manage' && <StackedList jobs={jobs} action={openJob} />}
             {tabList == 'settings' && <Settings user={user} />}
             <Offcanvas jobId={jobId} onClose={() => setJobId('')} />
             {alerter[1] && <Alert text={alerter[0]} isError={alerter[1]} show={true} />}
