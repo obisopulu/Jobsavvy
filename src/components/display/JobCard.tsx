@@ -7,26 +7,26 @@ import Imager from "./Imager";
 import Button from "@/components/input/Button";
 import Keywords from "./Keywords";
 
-export default function StackedList({ action, id, companyName, firmImageUrl, position, datePosted, complete }: JobCardProps) {
+export default function StackedList({ action, id, jobCompany, jobImage, jobPosition, dateCreated, complete }: JobCardProps) {
   return (
-    <li key={companyName} className="flex justify-between flex-col gap-x-6 p-3 my-3 rounded-lg bg-gray-100">
+    <li key={jobCompany} className="flex justify-between flex-col gap-x-6 p-3 my-3 rounded-lg bg-gray-100">
       <div className="flex items-center flex-row gap-2">
         <div className="">
-          <Imager src={firmImageUrl} alt={companyName} scale={16} />
+          <Imager src={jobImage} alt={jobCompany} scale={16} />
         </div>
 
         <div className="flex gap-1 justify-between w-full items-center">
           <div className="flex flex-col">
             <div>
               <span className="text-sm font-black text-gray-900">
-                {position}
+                {jobPosition}
               </span>
               <span className="mt-1 ml-2 text-xs text-gray-500 lg:inline hidden">
-                Posted {datePosted}
+                Posted {/* dateCreated.seconds */}
               </span>
             </div>
             <p className="truncate text-xs leading-5 text-gray-500">
-              {companyName}
+              {jobCompany}
             </p>
             <div className="mt-4 sm:mt-0 text-end text-xs font-bold lg:block hidden">
               <Keywords keyword={'Java'} found={true} />
@@ -45,10 +45,10 @@ export default function StackedList({ action, id, companyName, firmImageUrl, pos
           <div className="flex flex-col items-center justify-between">
             <div className="flex items-center gap-2">
               {
-                complete == 'yes' && <div className="w-2 h-2 bg-emerald-500 rounded"></div>
+                complete && <div className="w-2 h-2 bg-emerald-500 rounded"></div>
               }
               {
-              complete == 'no' && <div className="w-2 h-2 bg-red-700 rounded"></div>
+              !complete && <div className="w-2 h-2 bg-red-700 rounded"></div>
               }
               <Button text={''} onClick={() => {action(id)}} symbol={'link'} />
             </div>
