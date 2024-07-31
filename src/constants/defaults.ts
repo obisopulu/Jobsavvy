@@ -9,7 +9,8 @@ export const documentDefaults = () => ({
   keywordsInclude: "keywordsInclude",
   name: "name",
   subject: "subject",
-  userId: "userId"
+  userId: "userId",
+  userLevel: ''
 });
 
 export const newDocumentDefaults = (name: string, email: string, uid: string, time: FieldValue) => ({
@@ -20,7 +21,8 @@ export const newDocumentDefaults = (name: string, email: string, uid: string, ti
   keywordsInclude: 'Java, Python, JavaScript, C++, Ruby, Go, PHP, TypeScript',
   name: name,
   subject: 'Job Application for {position} at {companyName}',
-  userId: uid
+  userId: uid,
+  userLevel: ''
 });
 
 export const homeStackedListButtons = (onClick: () => void): ButtonProps[] => [
