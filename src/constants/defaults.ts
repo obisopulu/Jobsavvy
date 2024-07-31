@@ -54,7 +54,12 @@ export const homeTabListButtons = (onClick: () => void): ButtonProps[] => [
   },
 ]
 
-export const optionsTabListButtons = (onClick: (text: string) => void): ButtonProps[] => [
+export const dashboardTabListButtons = (onClick: (text: string) => void): ButtonProps[] => [
+  {
+    symbol: "boss",
+    text: "Boss",
+    onClick: () => onClick('boss')
+  },
   {
     symbol: "manage",
     text: "Manage",
