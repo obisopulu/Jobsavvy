@@ -52,6 +52,7 @@ export default function Options() {
           router.push("/")
         } */
     })
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const logOut = async () => {
