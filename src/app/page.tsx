@@ -12,7 +12,7 @@ import { homeStackedListButtons, homeTabListButtons }from '../constants/defaults
 import Offcanvas from '@/components/display/Offcanvas';
 import Header from '@/components/display/Header';
 
-import { collection, getDocs, addDoc, deleteDoc, updateDoc, doc, serverTimestamp } from 'firebase/firestore';
+import { collection, getDoc, getDocs, addDoc, deleteDoc, updateDoc, doc, query, where, onSnapshot, serverTimestamp } from 'firebase/firestore';
 
 import { jobs } from '@/constants/defaults';
 import SignIn from '@/components/display/SignIn';
@@ -54,6 +54,7 @@ export default function Home() {
   } */
 
   const [jobId, setJobId] = useState<string>('');
+  const [jobList, setJobList] = useState<Array<any>>([]);
   const [user, setUser] = useState<string | object>('');
   const [splash, setSplash] = useState<boolean>(true);
 
@@ -61,11 +62,13 @@ export default function Home() {
     setJobId(id);
   }
   useEffect(() => {
+    getJobs()
     auth.authStateReady().then(() => {
       setUser(auth?.currentUser || '');
       setSplash(false);
       //smoove()
     });
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const onSignIn = async () => {
@@ -118,6 +121,24 @@ export default function Home() {
       <Alert text="Couldn't quite get you logged out" isError={true} show={true} />
     }
   }
+
+
+  const jobsRef = collection(db, 'jobs');
+  
+  const getJobs = async () => {
+    try{
+      const snapshot = await getDocs(jobsRef);
+      let fetchedData: Array<any> = []
+      snapshot.forEach(doc => {
+        fetchedData = [...fetchedData, doc.data()]//
+      });
+      setJobList([...fetchedData])
+      console.log(jobList);
+    }catch(e){
+      console.error('Error getting documents: ', e);
+    }
+  }
+
 
   return (
     <>
