@@ -53,11 +53,11 @@ export type StackedListProps = {
 export type JobCardProps = {
   action:  (id: string) => void;
   id: string;
-  companyName: string;
-  firmImageUrl: string;
-  position: string;
-  datePosted: string;
-  complete?: string;
+  jobCompany: string;
+  jobImage: string;
+  jobPosition: string;
+  dateCreated: object;
+  complete: boolean;
 };
 
 export type OffcanvasProps = {
@@ -90,6 +90,7 @@ export type UserOption = {
   name: string;
   subject: string;
   userId: string;
+  userLevel: string;
 }
 
 export type AlertProps = {
