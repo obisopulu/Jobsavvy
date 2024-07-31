@@ -5,8 +5,8 @@ import "@/app/globals.css";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Jobsavvy - Options",
-  description: "customise tech job search companion",
+  title: "Jobsavvy - Dashboard",
+  description: "Manage your profile",
 };
 
 export default function RootLayout({
