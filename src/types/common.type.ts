@@ -36,6 +36,7 @@ export type ImageProps = {
   src: any;
   alt: any;
   scale: number;
+  round?: string;
 };
 
 export type KeywordProps = {
@@ -46,6 +47,7 @@ export type KeywordProps = {
 export type StackedListProps = {
   action:  (id: string) => void;
   jobs: any[];
+  option?: string;
 };
 
 export type JobCardProps = {
