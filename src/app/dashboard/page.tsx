@@ -31,6 +31,7 @@ import Alert from '@/components/display/Alert';
 export default function Options() {
   const [user, setUser] = useState<string | object>('');
   const [jobId, setJobId] = useState<string>('');
+  const [jobList, setJobList] = useState<Array<any>>([]);
 
   const [tabList, setTabList] = useToggleTabList('settings');
   const [splash, setSplash] = useState<boolean>(true);
@@ -46,6 +47,7 @@ export default function Options() {
       .then(() => {
         setUser(auth?.currentUser || 'xx');
         setSplash(false);
+        getJobs()
         /* if(!auth?.currentUser) {
           router.push("/")
         } */
@@ -62,7 +64,26 @@ export default function Options() {
       setAlerter(["Couldn't quite get you logged out", true])
     }
   }
-  console.log(user)
+
+  const jobsRef = collection(db, 'jobs');
+  
+  const getJobs = async () => {
+    try{
+      const snapshot = await getDocs(jobsRef);
+      const jobs = snapshot.docs.map(
+        doc => {
+          const jobObj = doc.data()
+          jobObj.id = doc.id
+          return jobObj
+        }
+      );
+      setJobList(jobs);
+      console.log(jobs);
+    }catch(e){
+      console.error('Error getting documents: ', e);
+    }
+  }
+
   return (
     <>
       {
@@ -76,10 +97,12 @@ export default function Options() {
               <Menu logOut={logOut} user={user} action={openJob}/>
               <TabList buttons={dashboardTabListButtons(setTabList)} selected={tabList} />  
             </Hero>
+
             {tabList == 'boss' && 'noch blank'}
-            {tabList == 'manage' && <StackedList jobs={jobs} action={openJob} option='manage' />}
-            {tabList != 'settings' && tabList != 'manage' && tabList != 'boss' && <StackedList jobs={jobs} action={openJob} />}
+            {tabList == 'manage' && <StackedList jobs={jobList} action={openJob} option='manage' />}
             {tabList == 'settings' && <Settings user={user} />}
+            {tabList != 'settings' && tabList != 'manage' && tabList != 'boss' && <StackedList jobs={jobList} action={openJob} option='' />}
+
             <Offcanvas jobId={jobId} onClose={() => setJobId('')} />
             {alerter[1] && <Alert text={alerter[0]} isError={alerter[1]} show={true} />}
           </>
