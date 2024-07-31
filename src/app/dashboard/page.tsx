@@ -16,7 +16,7 @@ import Header from '@/components/display/Header';
 
 import { collection, getDocs, addDoc, deleteDoc, updateDoc, doc } from 'firebase/firestore';
 
-import { jobs, optionsTabListButtons } from '@/constants/defaults';
+import { jobs, dashboardTabListButtons } from '@/constants/defaults';
 import SignIn from '@/components/display/SignIn';
 
 
@@ -62,7 +62,7 @@ export default function Options() {
       setAlerter(["Couldn't quite get you logged out", true])
     }
   }
-  
+  console.log(user)
   return (
     <>
       {
@@ -74,10 +74,11 @@ export default function Options() {
           <>
             <Hero>
               <Menu logOut={logOut} user={user} action={openJob}/>
-              <TabList buttons={optionsTabListButtons(setTabList)} selected={tabList} />  
+              <TabList buttons={dashboardTabListButtons(setTabList)} selected={tabList} />  
             </Hero>
+            {tabList == 'boss' && 'noch blank'}
             {tabList == 'manage' && <StackedList jobs={jobs} action={openJob} option='manage' />}
-            {tabList != 'settings' && tabList != 'manage' && <StackedList jobs={jobs} action={openJob} />}
+            {tabList != 'settings' && tabList != 'manage' && tabList != 'boss' && <StackedList jobs={jobs} action={openJob} />}
             {tabList == 'settings' && <Settings user={user} />}
             <Offcanvas jobId={jobId} onClose={() => setJobId('')} />
             {alerter[1] && <Alert text={alerter[0]} isError={alerter[1]} show={true} />}
