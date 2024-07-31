@@ -62,10 +62,10 @@ export default function Home() {
     setJobId(id);
   }
   useEffect(() => {
-    getJobs()
     auth.authStateReady().then(() => {
       setUser(auth?.currentUser || '');
       setSplash(false);
+      getJobs()
       //smoove()
     });
   // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -128,12 +128,9 @@ export default function Home() {
   const getJobs = async () => {
     try{
       const snapshot = await getDocs(jobsRef);
-      let fetchedData: Array<any> = []
-      snapshot.forEach(doc => {
-        fetchedData = [...fetchedData, doc.data()]//
-      });
-      setJobList([...fetchedData])
-      console.log(jobList);
+      const jobs = snapshot.docs.map(doc => doc.data());
+      setJobList(jobs);
+      console.log(jobs);
     }catch(e){
       console.error('Error getting documents: ', e);
     }
@@ -158,7 +155,7 @@ export default function Home() {
               <Menu logOut={logOut} user={user} action={openJob}/>
               {/* <TabList buttons={homeTabListButtons(toggleActive)}/> */}  
             </Hero>            
-            <StackedList jobs={jobs} action={openJob} />
+            <StackedList jobs={jobList} action={openJob} option={'home'}/>
             <Offcanvas jobId={jobId} onClose={() => setJobId('')} /> 
           </>
         }  
